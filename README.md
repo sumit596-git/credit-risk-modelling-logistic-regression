@@ -21,13 +21,14 @@ This project develops a complete credit-risk modelling pipeline using the UCI De
 
 ## Project Objectives
 
-- **Data Preparation:** Assess and clean the credit-card customer dataset for reliable statistical modeling.
-- **Exploratory Data Analysis (EDA):** Investigate demographic profiles, credit limits, repayment statuses, bill amounts, and payment histories to uncover key default drivers.
-- **Predictive Modeling:** Train a logistic regression model to estimate the probability of credit-card default using stratified splitting and feature standardization.
-- **Model Evaluation:** Measure performance using classification metrics, confusion matrix analysis, ROC curves, and ROC-AUC.
-- **Multicollinearity Diagnostics:** Assess multicollinearity among numerical and repayment predictors using Variance Inflation Factors (VIF).
-- **Scorecard Development:** Transform predicted default probabilities into structured numerical credit scores using a log-odds scaling function.
-- **Scorecard Validation:** Analyze observed default rates across distinct score bands and compute rank-ordering correlations.
+The main objectives of this project are to:
+
+- Assess and prepare the credit-card dataset for statistical modelling.
+- Explore patterns in customer characteristics, repayment behaviour, and financial variables associated with default.
+- Develop and evaluate a logistic regression model for predicting credit-card default.
+- Assess multicollinearity among the model predictors.
+- Transform predicted default probabilities into a numerical credit score.
+- Validate the scorecard by examining observed default rates across score bands.
 
 ---
 
@@ -44,15 +45,23 @@ The analysis uses the **Default of Credit Card Clients** dataset (`UCI_credit_ca
 
 ## Methodology
 
-1. **Data Quality Assessment:** Audited missing values, duplicate records, variable distributions, and categorical code validity (handling undocumented levels in `EDUCATION` and `MARRIAGE`).
-2. **Exploratory Data Analysis:** Examined bivariate relationships between default risk and predictors such as recent repayment status (`PAY_1`), credit limits (`LIMIT_BAL`), and demographic attributes.
-3. **Logistic Regression Modeling:** Partitioned the data into an 80% training set and a 20% test set using stratified sampling to preserve class proportions. Categorical variables were dummy-encoded and features scaled appropriately.
-4. **Model Evaluation:** Evaluated model discriminatory power on unseen test data using Accuracy, Precision, Recall, F1-score, and ROC-AUC.
-5. **Multicollinearity Assessment:** Checked predictor collinearity, noting high collinearity among consecutive monthly bill statements (`BILL_AMT1` through `BILL_AMT6`).
-6. **Credit Scorecard Transformation:** Converted predicted default probabilities ($p$) into a project-specific credit score using a log-odds formula:
-   $$\text{Score} = 600 - 100\log\left(\frac{p}{1-p}\right)$$
-7. **Score Band Validation:** Segmented scores into discrete bands to compare predicted risk against observed historical default rates.
+The project follows a structured statistical modelling workflow:
 
+1. **Data Quality Assessment:** Examined missing values, duplicate observations, target distribution, variable ranges, and categorical-code validity.
+
+2. **Exploratory Data Analysis:** Analysed demographic, financial, repayment, bill, and payment variables using descriptive statistics and visualisations. Relationships between key predictors and default were also examined.
+
+3. **Data Preparation:** Dummy-encoded categorical demographic variables, retained repayment-status variables according to their ordinal meaning, and standardised predictors using the training data.
+
+4. **Logistic Regression Modelling:** Split the dataset into 80% training and 20% test data using stratified sampling, then fitted a logistic regression model on the training data.
+
+5. **Model Evaluation:** Evaluated predictions on the unseen test data using accuracy, precision, recall, F1-score, confusion matrix, ROC curve, and ROC-AUC.
+
+6. **Multicollinearity Assessment:** Calculated Variance Inflation Factors (VIF) for the main numerical and repayment-status predictors.
+
+7. **Credit Scorecard Development:** Converted predicted probabilities of default into project-specific numerical credit scores using a log-odds-based scoring function.
+
+8. **Scorecard Validation:** Grouped customers into score bands and compared observed default rates across the bands. Spearman correlation was also used to assess the relationship between score and observed default outcome.
 ---
 
 ## Challenges and Solutions
