@@ -4,10 +4,6 @@
 
 > A statistically driven credit-risk modelling project that predicts credit-card default probability using logistic regression and transforms model outputs into an interpretable numerical credit score.
 
-[![Python](https://img.shields.io/badge/Python-3.x-blue?logo=python&logoColor=white)](https://www.python.org/)
-[![Google Colab](https://img.shields.io/badge/Google%20Colab-Notebook-orange?logo=googlecolab&logoColor=white)](https://colab.research.google.com/)
-[![Scikit-learn](https://img.shields.io/badge/Scikit--learn-ML-F7931E?logo=scikit-learn&logoColor=white)](https://scikit-learn.org/)
-[![Statsmodels](https://img.shields.io/badge/Statsmodels-Statistics-4051B5)](https://www.statsmodels.org/)
 
 [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1nG2al7Foj9rVb658ay1wG2IQxkocK1w-)
 
@@ -131,9 +127,9 @@ EDA was used to investigate:
 
 A binary logistic regression model was fitted to estimate:
 
-\[
-P(\text{Default}=1\mid X)
-\]
+
+P(Y=1|X)
+
 
 The model provides an estimated probability of default for each customer.
 
@@ -171,9 +167,7 @@ Because default is the minority class, accuracy was not treated as the sole meas
 
 The fitted logistic regression coefficients were extracted and converted into odds ratios:
 
-\[
-OR_j=e^{\beta_j}
-\]
+An odds ratio greater than 1 indicates higher estimated odds of default associated with an increase in the corresponding predictor, while an odds ratio below 1 indicates lower estimated odds, conditional on the other variables in the model.
 
 This allows the direction and magnitude of associations between predictors and default odds to be interpreted.
 
