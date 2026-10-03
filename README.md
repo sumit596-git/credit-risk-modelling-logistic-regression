@@ -1,151 +1,277 @@
-# Credit Risk Modelling and Scorecard Development Using Logistic Regression
+# 💳 Credit Risk Modelling & Scorecard Development
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1nG2al7Foj9rVb658ay1wG2IQxkocK1w-)
+### Logistic Regression • Credit Risk • Statistical Modelling • Scorecard Development
 
-A logistic-regression-based credit-risk model designed to predict the probability of credit-card default and transform those predictions into an interpretable numerical credit score.
+> A statistically driven credit-risk modelling project that predicts credit-card default probability using logistic regression and transforms model outputs into an interpretable numerical credit score.
 
----
+[![Python](https://img.shields.io/badge/Python-3.x-blue?logo=python&logoColor=white)](https://www.python.org/)
+[![Google Colab](https://img.shields.io/badge/Google%20Colab-Notebook-orange?logo=googlecolab&logoColor=white)](https://colab.research.google.com/)
+[![Scikit-learn](https://img.shields.io/badge/Scikit--learn-ML-F7931E?logo=scikit-learn&logoColor=white)](https://scikit-learn.org/)
+[![Statsmodels](https://img.shields.io/badge/Statsmodels-Statistics-4051B5)](https://www.statsmodels.org/)
 
-## Interactive Notebook
-
-You can run and interact with the full project directly in Google Colab:
-- **Google Colab Notebook:** [Open `ml_regression_project.ipynb` in Google Colab](https://colab.research.google.com/drive/1nG2al7Foj9rVb658ay1wG2IQxkocK1w-)
-
----
-
-## Project Overview
-
-This project develops a complete credit-risk modelling pipeline using the UCI Default of Credit Card Clients dataset. It follows a structured statistical and machine learning workflow—covering rigorous data quality checks, exploratory data analysis (EDA), logistic regression modeling, performance evaluation, multicollinearity assessment, and credit-scorecard generation with score band validation.
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1nG2al7Foj9rVb658ay1wG2IQxkocK1w-)
 
 ---
 
-## Project Objectives
+## 📌 Project Overview
 
-The main objectives of this project are to:
+Credit risk modelling is fundamentally a **probability and ranking problem**: given a customer's observed financial and repayment characteristics, how likely are they to default?
 
-- Assess and prepare the credit-card dataset for statistical modelling.
-- Explore patterns in customer characteristics, repayment behaviour, and financial variables associated with default.
-- Develop and evaluate a logistic regression model for predicting credit-card default.
-- Assess multicollinearity among the model predictors.
-- Transform predicted default probabilities into a numerical credit score.
-- Validate the scorecard by examining observed default rates across score bands.
+This project develops an end-to-end **logistic-regression-based credit-risk model** using the **UCI Default of Credit Card Clients dataset**.
 
----
+The project goes beyond simply fitting a classifier. It combines:
 
-## Dataset
+- Statistical data-quality assessment
+- Exploratory data analysis
+- Logistic regression
+- Predicted default probabilities
+- 5-fold stratified cross-validation
+- ROC-AUC evaluation
+- Coefficient and odds-ratio interpretation
+- Multicollinearity analysis using VIF
+- Credit-score transformation
+- Score-band validation
 
-The analysis uses the **Default of Credit Card Clients** dataset (`UCI_credit_card_risk_dataset`), containing records for **30,000 credit-card customers** with **23 predictor variables**.
-
-* **Target Variable:** `target` (`0` = Non-default, `1` = Default)
-* **Dataset Size:** 30,000 observations
-* **Class Distribution:** 23,364 non-defaults and 6,636 defaults (approx. 22.12% portfolio default rate)
-* **Data Integrity:** Zero missing values identified; minor categorical code anomalies cleaned during preprocessing.
-
----
-
-## Methodology
-
-The project follows a structured statistical modelling workflow:
-
-1. **Data Quality Assessment:** Examined missing values, duplicate observations, target distribution, variable ranges, and categorical-code validity.
-
-2. **Exploratory Data Analysis:** Analysed demographic, financial, repayment, bill, and payment variables using descriptive statistics and visualisations. Relationships between key predictors and default were also examined.
-
-3. **Data Preparation:** Dummy-encoded categorical demographic variables, retained repayment-status variables according to their ordinal meaning, and standardised predictors using the training data.
-
-4. **Logistic Regression Modelling:** Split the dataset into 80% training and 20% test data using stratified sampling, then fitted a logistic regression model on the training data.
-
-5. **Model Evaluation:** Evaluated predictions on the unseen test data using accuracy, precision, recall, F1-score, confusion matrix, ROC curve, and ROC-AUC.
-
-6. **Multicollinearity Assessment:** Calculated Variance Inflation Factors (VIF) for the main numerical and repayment-status predictors.
-
-7. **Credit Scorecard Development:** Converted predicted probabilities of default into project-specific numerical credit scores using a log-odds-based scoring function.
-
-8. **Scorecard Validation:** Grouped customers into score bands and compared observed default rates across the bands. Spearman correlation was also used to assess the relationship between score and observed default outcome.
----
-
-## Challenges and Solutions
-
-Several practical and statistical challenges were encountered during the development of this project. The primary challenges and the corresponding analytical approaches used to resolve them are summarized below:
-
-| Challenge | Approach Used |
-| :--- | :--- |
-| **Class imbalance between default and non-default customers** | Stratified train-test splitting was used, and precision, recall, F1-score and ROC-AUC were reported alongside accuracy. |
-| **Numerically coded categorical and ordinal variables** | Categorical demographic variables were dummy encoded, while repayment-status variables were interpreted according to their ordinal meaning. |
-| **Right-skewed financial variables** | Distributions were examined using descriptive statistics and visualisations, and predictors were standardised before logistic regression. |
-| **Multicollinearity among monthly bill variables** | VIF was calculated to identify predictors with high multicollinearity, particularly the monthly bill amount variables. |
-| **Limited identification of actual defaulters at the 0.50 threshold** | Default-class precision and recall were examined separately rather than relying only on overall accuracy. |
-| **Converting predicted probabilities into a credit score** | A log-odds-based scoring function was used to transform predicted default probabilities into an interpretable numerical score. |
-| **Validating the scorecard** | Score bands were compared with observed default rates, and Spearman correlation was used to assess the monotonic relationship between score and default outcome. |
+The final outcome is an interpretable modelling pipeline connecting **default probability → risk ranking → credit score**.
 
 ---
 
-## Model Results
+## 🎯 Objectives
 
-Evaluated on the 20% unseen test dataset:
+The project aims to:
 
-| Metric | Result |
-| :--- | :---: |
-| **Accuracy** | 81.22% |
-| **Precision (Default)** | 71.71% |
-| **Recall (Default)** | 24.68% |
-| **F1-score (Default)** | 36.72% |
-| **ROC-AUC** | **0.721** |
-
-*The ROC-AUC of 0.721 demonstrates moderate discriminatory power. The lower default-class recall at the standard 0.50 threshold indicates that balancing threshold tuning or cost-sensitive learning could be explored in future iterations.*
-
----
-
-## Key Modeling Findings
-
-* **Repayment Behavior:** Recent repayment status (`PAY_1`) emerged as the strongest positive predictor of default risk, with delays of 2 or more months showing dramatically higher default rates.
-* **Credit Limits:** `LIMIT_BAL` demonstrated a negative association with default odds, indicating lower risk profiles among higher-limit cardholders.
-* **Multicollinearity:** Monthly bill amounts (`BILL_AMT1`–`BILL_AMT6`) exhibited substantial pairwise collinearity due to measuring related financial balances across consecutive months.
+1. Prepare and assess the credit-card dataset for statistical modelling.
+2. Explore demographic, financial, billing, payment, and repayment-status variables.
+3. Develop a logistic regression model for predicting credit-card default.
+4. Evaluate predictive performance using both a held-out test set and 5-fold stratified cross-validation.
+5. Interpret model coefficients through odds ratios.
+6. Diagnose multicollinearity among predictors.
+7. Transform predicted probabilities into an interpretable credit score.
+8. Validate the scorecard using observed default rates across score bands.
 
 ---
 
-## Credit Scorecard Results
+## 📊 Dataset
 
-The generated credit scores span from a minimum of **114** to a maximum of **2,570**, with a median of **741** and a mean of **746.21** (middle 50% between 703 and 800).
+The analysis uses the **Default of Credit Card Clients** dataset originally provided through the UCI Machine Learning Repository.
 
-### Score Band Validation
+| Property | Description |
+|---|---|
+| Observations | 30,000 |
+| Predictors | 23 |
+| Response | `target` |
+| `target = 0` | Non-default |
+| `target = 1` | Default |
+| Non-default observations | 23,364 |
+| Default observations | 6,636 |
+| Default rate | 22.12% |
 
-| Score Band | Customers | Defaults | Observed Default Rate |
-| :--- | ---: | ---: | ---: |
-| **<500** | 54 | 42 | 77.78% |
-| **500–599** | 401 | 284 | 70.82% |
-| **600–699** | 957 | 375 | 39.18% |
-| **700–799** | 3,076 | 451 | 14.66% |
-| **800–899** | 1,228 | 147 | 11.97% |
-| **900–999** | 232 | 21 | 9.05% |
-| **1000+** | 52 | 5 | 9.62% |
+### Main Variable Groups
 
-* **Rank-Order Performance:** The Spearman correlation between the credit score and observed default outcome was **-0.3176 ($p < 0.001$)**, confirming that higher scores reliably correspond to lower observed default rates.
+**Demographic**
+- `SEX`
+- `EDUCATION`
+- `MARRIAGE`
+- `AGE`
+
+**Credit information**
+- `LIMIT_BAL`
+
+**Repayment status**
+- `PAY_1` – `PAY_6`
+
+**Monthly bill amounts**
+- `BILL_AMT1` – `BILL_AMT6`
+
+**Monthly payment amounts**
+- `PAY_AMT1` – `PAY_AMT6`
+
+The response variable represents whether the customer defaulted on their credit-card payment in the subsequent month.
 
 ---
 
-## Limitations
+## 🔬 Methodology
 
-* Evaluated using a single train-test split rather than cross-validation.
-* Default-class recall is constrained at the default 0.50 decision threshold.
-* The scoring scale is project-specific and does not map directly to commercial credit bureau scoring models (e.g., FICO).
-* Implements a streamlined pipeline rather than full production Weight of Evidence (WoE) and Information Value (IV) binning procedures.
+The modelling pipeline follows a structured statistical workflow.
+
+### 1. Data Preparation
+
+- Loaded and cleaned the dataset.
+- Corrected column formatting and data types.
+- Removed the customer identifier from the predictor set.
+- Renamed `PAY_0` to `PAY_1` for consistent sequential naming.
+- Dummy-encoded categorical demographic variables.
+- Retained repayment-status variables according to their ordered coding.
+- Standardised predictors using the training data.
+
+### 2. Data Quality Assessment
+
+The dataset was examined for:
+
+- Missing observations
+- Duplicate observation patterns
+- Target-class distribution
+- Variable ranges
+- Categorical and ordinal coding validity
+
+No missing values were identified.
+
+### 3. Exploratory Data Analysis
+
+EDA was used to investigate:
+
+- Distribution of demographic variables
+- Credit-limit characteristics
+- Repayment behaviour
+- Monthly billing and payment patterns
+- Default rates across important predictors
+- Relationships between customer characteristics and default
+
+### 4. Logistic Regression
+
+A binary logistic regression model was fitted to estimate:
+
+\[
+P(\text{Default}=1\mid X)
+\]
+
+The model provides an estimated probability of default for each customer.
+
+### 5. 5-Fold Stratified Cross-Validation
+
+To assess the stability of predictive performance, **5-fold stratified cross-validation** was performed on the training data.
+
+Stratification preserves the approximate default/non-default proportion across folds.
+
+The model was evaluated using:
+
+- Accuracy
+- Precision
+- Recall
+- F1-score
+- ROC-AUC
+
+The mean and standard deviation across folds were reported.
+
+### 6. Model Evaluation
+
+Performance was assessed using:
+
+- Confusion matrix
+- Accuracy
+- Precision
+- Recall
+- F1-score
+- ROC curve
+- ROC-AUC
+
+Because default is the minority class, accuracy was not treated as the sole measure of model performance.
+
+### 7. Model Interpretation
+
+The fitted logistic regression coefficients were extracted and converted into odds ratios:
+
+\[
+OR_j=e^{\beta_j}
+\]
+
+This allows the direction and magnitude of associations between predictors and default odds to be interpreted.
+
+### 8. Multicollinearity
+
+Variance Inflation Factors (VIF) were examined to identify potential multicollinearity among predictors, particularly the monthly bill variables.
+
+### 9. Credit Scorecard
+
+Predicted probabilities of default were transformed into numerical credit scores using a log-odds-based scoring relationship.
+
+The resulting scores provide an interpretable risk-ranking mechanism in which lower predicted default risk corresponds to higher credit scores.
+
+### 10. Scorecard Validation
+
+Customers were grouped into score bands and the observed default rate was examined across the bands.
+
+A monotonic relationship between score and observed default behaviour was also assessed using Spearman correlation.
 
 ---
 
-## Technologies and Libraries
+## 📈 Model Performance
 
-* **Language:** Python
-* **Environment:** Google Colab / Jupyter Notebook
-* **Core Libraries:** Pandas, NumPy, Scikit-learn, Statsmodels, SciPy, Matplotlib, Seaborn
+### 5-Fold Cross-Validation
+
+| Metric | Mean CV Score | Std. Dev. |
+|---|---:|---:|
+| Accuracy | **0.8111** | 0.0044 |
+| Precision | **0.7157** | 0.0222 |
+| Recall | **0.2425** | 0.0166 |
+| F1-score | **0.3621** | 0.0210 |
+| ROC-AUC | **0.7249** | 0.0034 |
+
+The relatively small standard deviation of ROC-AUC indicates that the model's discriminatory performance is reasonably stable across the five validation folds.
+
+The relatively low recall indicates that the standard 0.50 classification threshold identifies only a portion of the actual default cases. This highlights the importance of considering the classification threshold and the business cost associated with different types of classification errors.
+
+### Held-Out Test Set
+
+| Metric | Test Result |
+|---|---:|
+| Accuracy | **81.22%** |
+| Precision | **71.71%** |
+| Recall | **24.68%** |
+| F1-score | **36.72%** |
+| ROC-AUC | **0.721** |
+
+The test-set ROC-AUC of **0.721** is close to the cross-validation mean of **0.7249**, providing consistent evidence of the model's discriminatory performance across validation and held-out data.
+
+> **Important:** Cross-validation is used here to assess performance stability; it is not treated as a method for increasing the model's predictive performance.
 
 ---
 
-## Project Structure
+## 🔎 Key Findings
+
+### Repayment Behaviour
+
+Repayment-status variables, particularly recent repayment behaviour such as `PAY_1`, show strong associations with default risk.
+
+Customers exhibiting more severe recent repayment delays have substantially higher observed default rates.
+
+### Credit Limit
+
+`LIMIT_BAL` shows a negative association with default odds in the fitted model, indicating lower model-estimated default odds for customers with higher credit limits, conditional on the other variables in the model.
+
+### Multicollinearity
+
+Monthly bill variables exhibit substantial correlation because they represent related financial balances measured over consecutive months.
+
+This is reflected in elevated VIF values for some bill-related predictors.
+
+### Classification Threshold
+
+At the conventional 0.50 threshold, the model has relatively low recall for the default class.
+
+This demonstrates an important distinction between:
+
+**probability estimation and binary classification.**
+
+The logistic model produces a continuous probability of default, while converting that probability into a binary decision requires selecting a threshold.
+
+---
+
+## 💳 Credit Scorecard
+
+The logistic model's predicted default probabilities are transformed into a numerical credit score using the relationship between **probability of default and log-odds**.
+
+Conceptually:
 
 ```text
-credit-risk-modelling-logistic-regression/
-│
-├── ml_regression_project.ipynb
-├── credit_risk_data_iitb.csv
-└── README.md
+Customer characteristics
+          ↓
+Logistic Regression
+          ↓
+Probability of Default
+          ↓
+Log-Odds Transformation
+          ↓
+Credit Score
+          ↓
+Risk Ranking / Score Bands
