@@ -213,9 +213,9 @@ The relatively low recall indicates that the standard 0.50 classification thresh
 | Precision | **71.71%** |
 | Recall | **24.68%** |
 | F1-score | **36.72%** |
-| ROC-AUC | **0.721** |
+| ROC-AUC | **0.72** |
 
-The test-set ROC-AUC of **0.721** is close to the cross-validation mean of **0.7249**, providing consistent evidence of the model's discriminatory performance across validation and held-out data.
+The test-set ROC-AUC of **0.72** is close to the cross-validation mean of **0.73**, providing consistent evidence of the model's discriminatory performance across validation and held-out data.
 
 > **Important:** Cross-validation is used here to assess performance stability; it is not treated as a method for increasing the model's predictive performance.
 
